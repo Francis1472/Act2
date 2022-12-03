@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Shopping List</a>
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+            </ul>
+
+            <form class="d-flex" role="search" style="margin-right: 25px;">
+                <input class="form-control me-2" type="search"
+                    placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <a class="nav-item" aria-current="page" href="/logout">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id="topdiv6">
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Shopping Cart</span>
+    </nav>
+    <div class="row" id="index0">
+        {% for item in items %}
+        <div class="card needspace" style="width: 18rem;">
+            <img src="{{url_for('static', filename='2.png')}}"
+                class="card-img-top" alt="..." style="margin-top: 10px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.product }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Lorem Ipsum is simply dummy
+                    text of the printing and typesetting industry.
+                </li>
+
+                {% if item.purchased == True %}
+                    <li class="list-group-item">
+                        purchased
+                    </li>
+                {% else %}
+                    <li class="list-group-item">
+                        <a href="/home/cart/delete/{{ item.id }}">Remove Item</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/home/buy/{{ item.id }}">Buy Now</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
